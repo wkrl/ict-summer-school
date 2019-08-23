@@ -27,14 +27,15 @@ while True:
         minSize=(20, 20)
     )
     
-    print faces
     if any(map(lambda x: any(x), faces)) and not_run_yet:
         now = time.time()
-        print "face(s) detected"
+        print "Face(s) detected"
         cv2.imwrite("face.jpg", img)
         print "Image file written"
-        # run email script here
+        # run email script 
         call(["python", "send_mail.py"])
+	# run aws script
+	call(["python", "upload_s3.py"])
         not_run_yet = False
 
     if time.time() - now > 15:
